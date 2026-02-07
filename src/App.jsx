@@ -1,6 +1,6 @@
 import React from "react";
 import { ThemeProvider, CssBaseline } from "@mui/material";
-import theme from "./Theme";
+import theme from "./theme";
 
 // Import all components
 import Header from "./components/Header";
