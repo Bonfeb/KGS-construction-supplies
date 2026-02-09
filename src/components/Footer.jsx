@@ -69,7 +69,7 @@ export default function Footer() {
                     flexShrink: 0,
                   }}
                 />
-                <span className="contact-text">0745 188 133</span>
+                <span className="contact-text">+254 745 188 133</span>
               </div>
               <div className="contact-item">
                 <Email
