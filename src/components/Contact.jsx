@@ -29,13 +29,13 @@ export default function ContactSection() {
             content: (
                 <>
                     <Typography variant="body1" gutterBottom sx={{ color: 'text.primary' }}>
-                        0745 188 133
+                        +254 745 188 133
                     </Typography>
                     <Typography variant="body1" gutterBottom sx={{ color: 'text.primary' }}>
-                        +245 748 593 915
+                        +254 748 593 915
                     </Typography>
                     <Typography variant="body1" sx={{ color: 'text.primary' }}>
-                        0746 310 053
+                        +254 746 310 053
                     </Typography>
                 </>
             )

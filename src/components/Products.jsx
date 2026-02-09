@@ -9,22 +9,14 @@ import {
   IconButton,
   useMediaQuery,
   useTheme,
+  Dialog,
+  DialogContent,
 } from "@mui/material";
 import {
   CheckCircle,
   ChevronLeft,
   ChevronRight,
-  Construction,
-  Build,
-  Hardware,
-  Plumbing,
-  Palette,
-  ElectricalServices,
-  Fence,
-  Straighten,
-  Security,
-  HomeRepairService,
-  Handyman,
+  Close,
 } from "@mui/icons-material";
 
 export default function Products() {
@@ -32,67 +24,68 @@ export default function Products() {
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
   const [currentSlide, setCurrentSlide] = useState(0);
   const [autoSlide, setAutoSlide] = useState(true);
+  const [openImage, setOpenImage] = useState(null);
 
   const products = [
     {
       name: "Sand & Stone",
-      icon: <Construction fontSize="large" />,
+      image: "Sand & Stone.webp",
       description:
         "Premium quality sand and aggregates for all construction needs",
     },
     {
       name: "Steel Bars",
-      icon: <Hardware fontSize="large" />,
+      image: "Steel Bars.webp",
       description: "High-grade reinforcement steel bars in various sizes",
     },
     {
       name: "Iron Sheets",
-      icon: <Straighten fontSize="large" />,
+      image: "Iron Sheets.webp",
       description: "Durable roofing and walling iron sheets",
     },
     {
       name: "Plumbing Items",
-      icon: <Plumbing fontSize="large" />,
+      image: "Plumbing.webp",
       description: "Complete range of pipes, fittings, and fixtures",
     },
     {
       name: "Electrical Items",
-      icon: <ElectricalServices fontSize="large" />,
+      image: "Electrical.webp",
       description: "Quality wiring, switches, and electrical accessories",
     },
     {
       name: "Paints & More",
-      icon: <Palette fontSize="large" />,
+      image: "Paints.webp",
       description: "Wide selection of interior and exterior paints",
     },
     {
       name: "Tools",
-      icon: <Build fontSize="large" />,
+      image: "Tools.webp",
       description: "Professional construction and hand tools",
     },
     {
       name: "Accessories",
-      icon: <Handyman fontSize="large" />,
+      image: "Accessories.webp",
       description: "Essential hardware accessories and fasteners",
     },
     {
       name: "Safety Gear",
-      icon: <Security fontSize="large" />,
+      image: "Safety Gear.webp",
       description: "Protective equipment for safe construction work",
     },
     {
       name: "Fencing Posts",
-      icon: <Fence fontSize="large" />,
+      image: "Fencing Posts.webp",
       description: "Sturdy posts for residential and commercial fencing",
     },
     {
       name: "Mesh Wire",
-      icon: <Fence fontSize="large" />,
+      image: "Wire Mesh.webp",
       description: "Quality mesh wire for fencing and security",
     },
     {
       name: "Hardware",
-      icon: <HomeRepairService fontSize="large" />,
+      image: "Hardware.webp",
       description: "Complete hardware solutions for every project",
     },
   ];
@@ -147,6 +140,14 @@ export default function Products() {
     setTimeout(() => setAutoSlide(true), 10000);
   };
 
+  const handleImageClick = (product) => {
+    setOpenImage(product);
+  };
+
+  const handleCloseImage = () => {
+    setOpenImage(null);
+  };
+
   const ProductCard = ({ product }) => {
     return (
       <Paper
@@ -154,7 +155,7 @@ export default function Products() {
         sx={{
           p: 3,
           textAlign: "center",
-          height: 350, // Fixed height for all cards
+          height: 380,
           width: "100%",
           display: "flex",
           flexDirection: "column",
@@ -163,7 +164,7 @@ export default function Products() {
           transition: "all 0.3s ease-in-out",
           borderRadius: 3,
           boxShadow: "0 4px 20px rgba(0, 0, 0, 0.15)",
-          bgcolor: "#e8eaed", // Further reduced brightness (darker off-white/light gray)
+          bgcolor: "#e8eaed",
           color: "text.primary",
           position: "relative",
           overflow: "hidden",
@@ -174,24 +175,34 @@ export default function Products() {
         }}
       >
         <Box
+          onClick={() => handleImageClick(product)}
           sx={{
-            color: "primary.main",
             mb: 3,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            width: 90,
-            height: 90,
-            borderRadius: "50%",
-            bgcolor: "rgba(251, 191, 36, 0.1)",
+            width: 140,
+            height: 140,
+            borderRadius: "12px",
+            overflow: "hidden",
+            cursor: "pointer",
             transition: "all 0.3s",
             "&:hover": {
-              bgcolor: "rgba(251, 191, 36, 0.2)",
               transform: "scale(1.05)",
+              boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
             },
           }}
         >
-          {product.icon}
+          <img
+            src={`/${product.image}`}
+            alt={product.name}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              borderRadius: "12px",
+            }}
+          />
         </Box>
         <Typography
           variant="h5"
@@ -319,7 +330,7 @@ export default function Products() {
           >
             {/* For Small to Medium Screens - Single Card Carousel */}
             {!isLargeScreen ? (
-              <Box sx={{ position: "relative", minHeight: 400 }}>
+              <Box sx={{ position: "relative", minHeight: 430 }}>
                 {products.map((product, index) => (
                   <Box
                     key={product.name}
@@ -348,7 +359,7 @@ export default function Products() {
               <Box
                 sx={{
                   position: "relative",
-                  minHeight: 380,
+                  minHeight: 410,
                 }}
               >
                 {productGroups.map((group, groupIndex) => (
@@ -362,7 +373,8 @@ export default function Products() {
                       opacity: groupIndex === currentSlide ? 1 : 0,
                       transition: "opacity 0.6s ease-in-out",
                       zIndex: groupIndex === currentSlide ? 1 : 0,
-                      pointerEvents: groupIndex === currentSlide ? "auto" : "none",
+                      pointerEvents:
+                        groupIndex === currentSlide ? "auto" : "none",
                     }}
                   >
                     <Grid container spacing={4} justifyContent="center">
@@ -437,7 +449,7 @@ export default function Products() {
                   icon={<CheckCircle sx={{ fontSize: "1.2rem" }} />}
                   label={product}
                   sx={{
-                    bgcolor: "#e8eaed", // Further reduced brightness (darker off-white/light gray)
+                    bgcolor: "#e8eaed",
                     color: "primary.main",
                     fontWeight: 600,
                     width: "100%",
@@ -460,6 +472,88 @@ export default function Products() {
           </Grid>
         </Box>
       </Container>
+
+      {/* Image Preview Dialog */}
+      <Dialog
+        open={!!openImage}
+        onClose={handleCloseImage}
+        maxWidth="md"
+        fullWidth
+        PaperProps={{
+          sx: {
+            bgcolor: "transparent",
+            boxShadow: "none",
+            overflow: "visible",
+          },
+        }}
+      >
+        <IconButton
+          onClick={handleCloseImage}
+          sx={{
+            position: "absolute",
+            right: -10,
+            top: -10,
+            bgcolor: "secondary.main",
+            color: "primary.dark",
+            "&:hover": {
+              bgcolor: "secondary.dark",
+            },
+            zIndex: 1,
+          }}
+        >
+          <Close />
+        </IconButton>
+        <DialogContent sx={{ p: 0, overflow: "visible" }}>
+          {openImage && (
+            <Box
+              sx={{
+                position: "relative",
+                width: "100%",
+                bgcolor: "white",
+                borderRadius: 2,
+                overflow: "hidden",
+                boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)",
+              }}
+            >
+              <img
+                src={`/${openImage.image}`}
+                alt={openImage.name}
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  display: "block",
+                }}
+              />
+              <Box
+                sx={{
+                  p: 3,
+                  bgcolor: "white",
+                  textAlign: "center",
+                }}
+              >
+                <Typography
+                  variant="h5"
+                  sx={{
+                    fontWeight: 700,
+                    color: "primary.main",
+                    mb: 1,
+                  }}
+                >
+                  {openImage.name}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: "text.secondary",
+                  }}
+                >
+                  {openImage.description}
+                </Typography>
+              </Box>
+            </Box>
+          )}
+        </DialogContent>
+      </Dialog>
     </Box>
   );
 }

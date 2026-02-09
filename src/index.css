@@ -40,10 +40,32 @@ code {
 /* Hero Section Container */
 .hero-section {
     width: 100%;
-    background: linear-gradient(135deg, #1e293b 0%, #1e3a8a 100%);
+    background-image: url('/KGS Cover.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
     color: white;
     padding: 3rem 0;
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+/* Dark overlay for better text readability */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(30, 41, 59, 0.7); /* Semi-transparent dark overlay */
+    z-index: 1;
+}
+
+/* Ensure content appears above overlay */
+.hero-section .container {
+    position: relative;
+    z-index: 2;
 }
 
 @media (min-width: 768px) {
